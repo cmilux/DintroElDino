@@ -1,0 +1,4 @@
+repository "DintroElDino/Dintro el dino@1375390175365@cloud"
+  path "/"
+    br "/main"
+    co "/main"
