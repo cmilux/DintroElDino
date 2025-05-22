@@ -1,13 +1,22 @@
 using UnityEngine;
+using TMPro;
 
 public class PlayerHealth : MonoBehaviour
 {
     public int health = 3;
 
+    private GameManager gameManager;
+
+
+    private void Start()
+    {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
     //Player life
     public void DamagePlayer()
     {
         health--;
+       
         Debug.Log(health);
 
     }

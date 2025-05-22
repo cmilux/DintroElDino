@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
     public float _speed = 5f;
     private float _horizontalInput;
     public float _jumpForce = 7f;
-    public float xRange = 8.5f;
+    public float xRange = 9.5f;
 
     private Rigidbody2D _playerRb;
 

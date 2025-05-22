@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: 0664c4a918eb8884e9bbf4a0fd68c2f8
+guid: 446e3fb67dca3f94b9f9f52c2cf2669d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1888947926868624597
-    second: estrella 64x64_0
+      213: -1615193348752318154
+    second: walking dino_0
+  - first:
+      213: 7335010702511013811
+    second: walking dino_1
+  - first:
+      213: -844399587047218882
+    second: walking dino_2
+  - first:
+      213: 1639465726262489095
+    second: walking dino_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -53,7 +62,7 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 0
+  spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -100,7 +109,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: estrella 64x64_0
+      name: walking dino_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +124,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5d40734a124e63a10800000000000000
-      internalID: 1888947926868624597
+      spriteID: 6316b0cf43ea599e0800000000000000
+      internalID: -1615193348752318154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walking dino_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3bf7bd21f513bc560800000000000000
+      internalID: 7335010702511013811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walking dino_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e316095ac071844f0800000000000000
+      internalID: -844399587047218882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walking dino_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 700bd4b446d80c610800000000000000
+      internalID: 1639465726262489095
       vertices: []
       indices: 
       edges: []
@@ -125,7 +200,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 59e1988b28283244bbe143c76c1b4f42
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +210,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      estrella 64x64_0: 1888947926868624597
+      walking dino_0: -1615193348752318154
+      walking dino_1: 7335010702511013811
+      walking dino_2: -844399587047218882
+      walking dino_3: 1639465726262489095
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

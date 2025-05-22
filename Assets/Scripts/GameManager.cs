@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -8,6 +10,8 @@ using UnityEditor;
 public class GameManager : MonoBehaviour
 {
     private PlayerHealth playerHealth;
+    public TextMeshProUGUI healthCounter;
+    public TextMeshProUGUI scoreCounter;
 
     private void Start()
     {
@@ -21,6 +25,7 @@ public class GameManager : MonoBehaviour
 
         GameOver();
 
+        healthCounter.SetText("Lives: " + playerHealth.health);
     }
 
     //Close the game from the build
