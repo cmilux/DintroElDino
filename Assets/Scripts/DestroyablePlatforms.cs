@@ -24,13 +24,7 @@ public class DestroyablePlatforms : MonoBehaviour
         {
             //calls the disablePlatform method to disable the platform after the amount of time set in the disableDelay variable
             Invoke("DisablePlatform", disableDelay);
-            Invoke("Drop",disableDelay);
         }
-    }
-
-    void Drop()
-    { 
-        platformRb.bodyType = RigidbodyType2D.Dynamic;
     }
 
     void DisablePlatform()
