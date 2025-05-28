@@ -10,22 +10,29 @@ using UnityEditor;
 public class GameManager : MonoBehaviour
 {
     private PlayerHealth playerHealth;
+    private PlayerController playerController;
+    private PlayerInventory playerInventory;
+
     public TextMeshProUGUI healthCounter;
     public TextMeshProUGUI scoreCounter;
 
+    //Gets scripts components from player
     private void Start()
     {
         playerHealth = GameObject.Find("Player").GetComponent<PlayerHealth>();
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        playerInventory = GameObject.Find("Player").GetComponent<PlayerInventory>();
     }
 
+    //Checks every frame to see if this methods are called
     void Update()
     {
         ExitGame_Build();
 
-
         GameOver();
 
         healthCounter.SetText("Lives: " + playerHealth.health);
+        scoreCounter.SetText("Score: " + playerInventory.starCollectible);
     }
 
     //Close the game from the build
@@ -46,17 +53,18 @@ public class GameManager : MonoBehaviour
 
     }
 
-    //Game over
+    //Game over if lives are gone or if player falls into the void
     public void GameOver()
     {
-        if (playerHealth.health == 0)
+        if (playerHealth.health <= 0 || playerController.transform.position.y < playerController.yRange)
         {
             Debug.Log("Game Over");
             RestartGame();
         }
+        
     }
 
-    //Closes the game from a button
+    //Closes the game from the exit button
     public void ExitFromGame_Unity()
     {
 #if UNITY_EDITOR

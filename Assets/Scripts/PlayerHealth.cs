@@ -7,7 +7,10 @@ public class PlayerHealth : MonoBehaviour
 
     private GameManager gameManager;
 
-
+    private void Update()
+    {
+        Debug.Log(health);
+    }
     private void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -16,9 +19,6 @@ public class PlayerHealth : MonoBehaviour
     public void DamagePlayer()
     {
         health--;
-       
-        Debug.Log(health);
-
     }
 
     //If player collides with an obstacle
