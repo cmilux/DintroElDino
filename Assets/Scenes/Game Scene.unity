@@ -36509,9 +36509,17 @@ PrefabInstance:
       propertyPath: disableDelay
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -4020699954708408597, guid: b93bf626e3be76a4f9872c10c988dbf2, type: 3}
+      propertyPath: reenableDelay
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 253640107403968148, guid: b93bf626e3be76a4f9872c10c988dbf2, type: 3}
       propertyPath: m_Name
       value: DestroyablePlatform
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570604437793391650, guid: b93bf626e3be76a4f9872c10c988dbf2, type: 3}
+      propertyPath: m_UsedByEffector
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8384587555534441479, guid: b93bf626e3be76a4f9872c10c988dbf2, type: 3}
       propertyPath: m_LocalPosition.x

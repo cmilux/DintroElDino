@@ -3,6 +3,14 @@ using System.Collections;
 
 public class DestroyablePlatforms : MonoBehaviour
 {
+    /*
+     * THERE IS A PROBLEM
+     * 
+     * IF PLAYER HITS FROM THE BOTTOM IT DESTROYS IT ANYWAYS
+     * IT SHOULDNT HAPPEN
+     * 
+    */
+
     public float disableDelay = 2f;
     public float reenableDelay = 5f;
 
