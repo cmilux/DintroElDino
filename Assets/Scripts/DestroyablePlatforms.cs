@@ -1,0 +1,49 @@
+using UnityEngine;
+using System.Collections;
+
+public class DestroyablePlatforms : MonoBehaviour
+{
+    public float disableDelay = 2f;
+    public float reenableDelay = 5f;
+
+    private Collider2D platformCollider;
+    private SpriteRenderer platformSpriteRenderer;
+    private Rigidbody2D platformRb;
+
+    void Start()
+    {
+        platformRb = GetComponent<Rigidbody2D>();
+        platformRb.bodyType = RigidbodyType2D.Kinematic;
+        platformCollider = GetComponent<Collider2D>();
+        platformSpriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            //calls the disablePlatform method to disable the platform after the amount of time set in the disableDelay variable
+            Invoke("DisablePlatform", disableDelay);
+            Invoke("Drop",disableDelay);
+        }
+    }
+
+    void Drop()
+    { 
+        platformRb.bodyType = RigidbodyType2D.Dynamic;
+    }
+
+    void DisablePlatform()
+    {
+        platformCollider.enabled = false;     //collision disabled
+        platformSpriteRenderer.enabled = false;       //sprite disabled
+        Invoke("ReenablePlatform", reenableDelay);      //resets the blinking
+    }
+
+    void ReenablePlatform()
+    {
+        platformCollider.enabled = true;      //enables the collider again
+        platformSpriteRenderer.enabled = true;        //enables the sprite again
+    }
+    
+}
