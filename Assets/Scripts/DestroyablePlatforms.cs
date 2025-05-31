@@ -28,9 +28,8 @@ public class DestroyablePlatforms : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && (collision.transform.position.y > transform.position.y))
         {
-            //calls the disablePlatform method to disable the platform after the amount of time set in the disableDelay variable
             Invoke("DisablePlatform", disableDelay);
         }
     }

@@ -288,28 +288,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: no usar
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 96
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e45e953c5c862fc418b31a48613da172
-      internalID: 1957814408
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: ground and platforms_9
       rect:
         serializedVersion: 2
@@ -403,7 +381,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 48
-        width: 48
+        width: 16
         height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -485,6 +463,72 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: ground and platforms_8
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 304a19d6c237c804fb059baa47bda69e
+      internalID: -81923324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ground and platforms_17
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 48
+        width: 48
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f23e2db4d58d2e743a01740720c7554f
+      internalID: -1617057597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ground and platforms_18
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 80
+        width: 16
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 620e21b397c28aa44bf4d5a5a4be1824
+      internalID: -1002153255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -508,14 +552,16 @@ TextureImporter:
       ground and platforms_14: 1999258570
       ground and platforms_15: -1685100514
       ground and platforms_16: -1259007480
+      ground and platforms_17: -1617057597
+      ground and platforms_18: -1002153255
       ground and platforms_2: -3016157132402913636
       ground and platforms_3: 5156314525323916427
       ground and platforms_4: 6091599453557826203
       ground and platforms_5: -1246380745
       ground and platforms_6: 975791440
       ground and platforms_7: 1295543451
+      ground and platforms_8: -81923324
       ground and platforms_9: -794374940
-      no usar: 1957814408
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
