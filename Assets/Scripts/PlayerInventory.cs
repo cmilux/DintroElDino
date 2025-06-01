@@ -10,7 +10,7 @@ public class PlayerInventory : MonoBehaviour
         starCollectible += score;
     }
 
-    
+
     //Collects the collectible, destroys it and add 10 everytime
     private void OnTriggerEnter2D(Collider2D collision)
     {

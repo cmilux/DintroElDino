@@ -3,13 +3,14 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float _speed = 5f;
+    public float speed = 5f;
     private float _horizontalInput;
-    public float _jumpForce = 7f;
+    public float jumpForce = 7f;
     public float xRange = 8.75f;
     public float yRange = -7f;
 
     private Rigidbody2D _playerRb;
+    private SpriteRenderer _spriteRenderer;
 
     private bool playerIsOnGround = true;
 
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         _playerRb = GetComponent<Rigidbody2D>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -33,7 +35,7 @@ public class PlayerController : MonoBehaviour
     {
         //Player movement
         _horizontalInput = Input.GetAxis("Horizontal");
-        _playerRb.linearVelocityX = _horizontalInput * _speed;
+        _playerRb.linearVelocityX = _horizontalInput * speed;
     }
 
     void PlayerJump()
@@ -41,7 +43,7 @@ public class PlayerController : MonoBehaviour
         //Player jump
         if (Input.GetKeyDown(KeyCode.Space) & playerIsOnGround)
         {
-            _playerRb.AddForceY(_jumpForce, ForceMode2D.Impulse);
+            _playerRb.AddForceY(jumpForce, ForceMode2D.Impulse);
             playerIsOnGround = false;
         }
     }
@@ -60,11 +62,13 @@ public class PlayerController : MonoBehaviour
         // Rotates sprite when moving left/right
         if (_horizontalInput > 0)
         {
-            transform.localScale = new Vector2(1, 1); // Face right
+            _spriteRenderer.flipX = false;
+            //transform.localScale = new Vector2(1, 1); // Face right
         }
         else if (_horizontalInput < 0)
         {
-            transform.localScale = new Vector2(-1, 1); // Face left
+            _spriteRenderer.flipX = true;
+            //transform.localScale = new Vector2(-1, 1); // Face left
         }
     }
 

@@ -46,5 +46,5 @@ public class DestroyablePlatforms : MonoBehaviour
         platformCollider.enabled = true;      //enables the collider again
         platformSpriteRenderer.enabled = true;        //enables the sprite again
     }
-    
+
 }

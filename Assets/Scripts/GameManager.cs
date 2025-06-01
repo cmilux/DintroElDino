@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("Game Over");
             RestartGame();
         }
-        
+
     }
 
     //Closes the game from the exit button
