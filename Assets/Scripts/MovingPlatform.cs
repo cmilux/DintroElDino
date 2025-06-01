@@ -31,11 +31,13 @@ public class MovingPlatform : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, points[i].position, speed * Time.deltaTime);
     }
 
+    //Sets the player as a child objet
     private void OnCollisionEnter2D(Collision2D collision)
     {
         collision.transform.SetParent(transform, true);
     }
 
+    //Sets the player off from being a child objet
     private void OnCollisionExit2D(Collision2D collision)
     {
         collision.transform.SetParent(null, true);
@@ -43,7 +45,7 @@ public class MovingPlatform : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        //debug visualization
+        //debug visualization of the connection points
         if (points[0] != null && points[1] != null)
         {
             Gizmos.DrawLine(transform.position, points[0].position);

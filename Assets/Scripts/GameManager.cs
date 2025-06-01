@@ -31,6 +31,10 @@ public class GameManager : MonoBehaviour
 
         GameOver();
 
+        SettingText();
+    }
+    public void SettingText()
+    {
         healthCounter.SetText("Lives: " + playerHealth.health);
         scoreCounter.SetText("Score: " + playerInventory.starCollectible);
     }

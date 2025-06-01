@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float speed = 5f;
-    private float _horizontalInput;
+    public float horizontalInput;
     public float jumpForce = 7f;
     public float xRange = 8.75f;
     public float yRange = -7f;
@@ -34,8 +34,8 @@ public class PlayerController : MonoBehaviour
     void PlayerMovement()
     {
         //Player movement
-        _horizontalInput = Input.GetAxis("Horizontal");
-        _playerRb.linearVelocityX = _horizontalInput * speed;
+        horizontalInput = Input.GetAxis("Horizontal");
+        _playerRb.linearVelocityX = horizontalInput * speed;
     }
 
     void PlayerJump()
@@ -60,12 +60,12 @@ public class PlayerController : MonoBehaviour
     void PlayerRotation()
     {
         // Rotates sprite when moving left/right
-        if (_horizontalInput > 0)
+        if (horizontalInput > 0)
         {
             _spriteRenderer.flipX = false;
             //transform.localScale = new Vector2(1, 1); // Face right
         }
-        else if (_horizontalInput < 0)
+        else if (horizontalInput < 0)
         {
             _spriteRenderer.flipX = true;
             //transform.localScale = new Vector2(-1, 1); // Face left
@@ -75,21 +75,23 @@ public class PlayerController : MonoBehaviour
     //Prevent the player of infite jumping
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        foreach (ContactPoint2D contact in collision.contacts)
+        {
+            if (contact.normal.y > 0.5f)
+            {
+                if (collision.gameObject.CompareTag("Ground") ||
+            collision.gameObject.CompareTag("Platform"))
+                {
+                    playerIsOnGround = true;
+                    return;
+                }
+            }
+        }
+
+        if (collision.gameObject.CompareTag("Spike"))
         {
             playerIsOnGround = true;
         }
-
-        else if (collision.gameObject.CompareTag("Platform"))
-        {
-            playerIsOnGround = true;
-        }
-
-        else if (collision.gameObject.CompareTag("Spike"))
-        {
-            playerIsOnGround = true;
-        }
-
     }
 
     /*
