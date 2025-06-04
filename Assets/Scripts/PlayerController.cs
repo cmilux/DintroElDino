@@ -10,15 +10,20 @@ public class PlayerController : MonoBehaviour
     public float yRange = -7f;
 
     private Rigidbody2D _playerRb;
+    
     private SpriteRenderer _spriteRenderer;
 
     private bool playerIsOnGround = true;
+
+    public Animator animator;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _playerRb = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+
+        
     }
 
     // Update is called once per frame
@@ -36,6 +41,7 @@ public class PlayerController : MonoBehaviour
         //Player movement
         horizontalInput = Input.GetAxis("Horizontal");
         _playerRb.linearVelocityX = horizontalInput * speed;
+        animator.SetFloat("Movement", horizontalInput);
     }
 
     void PlayerJump()
@@ -45,7 +51,9 @@ public class PlayerController : MonoBehaviour
         {
             _playerRb.AddForceY(jumpForce, ForceMode2D.Impulse);
             playerIsOnGround = false;
+            animator.SetBool("IsJumping", !playerIsOnGround);
         }
+        
     }
 
     void PlayerScreenLimit()
@@ -63,12 +71,10 @@ public class PlayerController : MonoBehaviour
         if (horizontalInput > 0)
         {
             _spriteRenderer.flipX = false;
-            //transform.localScale = new Vector2(1, 1); // Face right
         }
         else if (horizontalInput < 0)
         {
             _spriteRenderer.flipX = true;
-            //transform.localScale = new Vector2(-1, 1); // Face left
         }
     }
 
@@ -83,6 +89,7 @@ public class PlayerController : MonoBehaviour
             collision.gameObject.CompareTag("Platform"))
                 {
                     playerIsOnGround = true;
+                    animator.SetBool("IsJumping", false);
                     return;
                 }
             }
@@ -91,6 +98,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Spike"))
         {
             playerIsOnGround = true;
+            animator.SetBool("IsJumping", false);
         }
     }
 
