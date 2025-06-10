@@ -3,7 +3,7 @@ using UnityEngine;
 public class CameraFollowing : MonoBehaviour
 {
     public float followSpeed = 2f;
-    public float yOffset = 1.5f;
+    public float yOffset = 2f;
 
     private readonly float zPos = -10;
 
@@ -28,7 +28,7 @@ public class CameraFollowing : MonoBehaviour
 
         if (target.transform.position.y >= 5)
         {
-            Vector3 offScreenPos = new((target.position.x + 7), 5 + yOffset, zPos);
+            Vector3 offScreenPos = new((target.position.x + 7), 6 + yOffset, zPos);
             transform.position = Vector3.Slerp(transform.position, offScreenPos, followSpeed * Time.deltaTime);
         }
 

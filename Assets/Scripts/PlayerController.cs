@@ -9,21 +9,23 @@ public class PlayerController : MonoBehaviour
     public float xRange = 8.75f;
     public float yRange = -7f;
 
+    private bool playerIsOnGround = true;
+
     private Rigidbody2D _playerRb;
     
     private SpriteRenderer _spriteRenderer;
 
-    private bool playerIsOnGround = true;
-
     public Animator animator;
+
+    //public AudioSource jumpSound;
+    //public AudioSource walkSound;
+    //public AudioSource hurtSound;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _playerRb = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-
-        
     }
 
     // Update is called once per frame
@@ -33,7 +35,6 @@ public class PlayerController : MonoBehaviour
         PlayerJump();
         PlayerScreenLimit();
         PlayerRotation();
-
     }
 
     void PlayerMovement()
@@ -47,13 +48,12 @@ public class PlayerController : MonoBehaviour
     void PlayerJump()
     {
         //Player jump
-        if (Input.GetKeyDown(KeyCode.Space) & playerIsOnGround)
+        if (Input.GetKeyDown(KeyCode.Space) || (Input.GetKeyDown(KeyCode.UpArrow)) & playerIsOnGround)
         {
             _playerRb.AddForceY(jumpForce, ForceMode2D.Impulse);
             playerIsOnGround = false;
             animator.SetBool("IsJumping", !playerIsOnGround);
         }
-        
     }
 
     void PlayerScreenLimit()
@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //Prevent the player of infite jumping
+    //Prevent the player of infite jumping w effector 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         foreach (ContactPoint2D contact in collision.contacts)
@@ -98,7 +98,18 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Spike"))
         {
             playerIsOnGround = true;
-            animator.SetBool("IsJumping", false);
+            animator.SetBool("IsAlive", false);
+
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Spike"))
+        {
+            playerIsOnGround = true;
+            animator.SetBool("IsAlive", true);
+
         }
     }
 

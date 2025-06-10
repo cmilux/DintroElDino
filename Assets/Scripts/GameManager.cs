@@ -15,6 +15,12 @@ public class GameManager : MonoBehaviour
 
     public TextMeshProUGUI healthCounter;
     public TextMeshProUGUI scoreCounter;
+    public TextMeshProUGUI finalScore;
+
+    public GameObject gameOver;
+
+    //public AudioSource victorySounds;
+    //public AudioSource backgroundMusic;
 
     //Gets scripts components from player
     private void Start()
@@ -55,6 +61,8 @@ public class GameManager : MonoBehaviour
 
         playerHealth.health = 3;
 
+        gameOver.SetActive(false);
+
     }
 
     //Game over if lives are gone or if player falls into the void
@@ -65,6 +73,14 @@ public class GameManager : MonoBehaviour
             Debug.Log("Game Over");
             RestartGame();
         }
+
+        if (playerController.transform.position.x >= 140)
+        {
+            gameOver.SetActive(true);
+
+            finalScore.SetText("Your score: " + playerInventory.starCollectible);
+        }
+
 
     }
 
