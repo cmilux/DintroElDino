@@ -17,8 +17,9 @@ public class PlayerController : MonoBehaviour
 
     public Animator animator;
 
-    //public AudioSource jumpSound;
-    //public AudioSource walkSound;
+    private AudioSource playerSounds;
+    public AudioClip walkSound;
+    public AudioClip jumpSound;
     //public AudioSource hurtSound;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -26,6 +27,9 @@ public class PlayerController : MonoBehaviour
     {
         _playerRb = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        playerSounds = GetComponent<AudioSource>();
+        //walkSound = GetComponent<AudioSource>();
+        //hurtSound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -43,16 +47,25 @@ public class PlayerController : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         _playerRb.linearVelocityX = horizontalInput * speed;
         animator.SetFloat("Movement", horizontalInput);
+        if (horizontalInput > 0 || horizontalInput < 0)
+        {
+            playerSounds.PlayOneShot(walkSound, 0.3f);
+        }
+        
     }
 
     void PlayerJump()
     {
         //Player jump
-        if (Input.GetKeyDown(KeyCode.Space) || (Input.GetKeyDown(KeyCode.UpArrow)) & playerIsOnGround)
+        if ((Input.GetKeyDown(KeyCode.Space) || 
+            (Input.GetKeyDown(KeyCode.UpArrow) || 
+            (Input.GetKeyDown(KeyCode.W)) 
+            & playerIsOnGround)))
         {
             _playerRb.AddForceY(jumpForce, ForceMode2D.Impulse);
             playerIsOnGround = false;
             animator.SetBool("IsJumping", !playerIsOnGround);
+            playerSounds.PlayOneShot(jumpSound, 1f);
         }
     }
 
