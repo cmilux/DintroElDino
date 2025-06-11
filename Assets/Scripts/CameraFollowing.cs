@@ -2,39 +2,47 @@ using UnityEngine;
 
 public class CameraFollowing : MonoBehaviour
 {
-    public float followSpeed = 2f;
-    public float yOffset = 2f;
+    private float followSpeed = 2f;                  //Follow player with camera speed
+    private float yOffset = 1.5f;                      //Vertical offset fot the camera's position
+    private float xForwardOffset = 7f;               //How far ahead of the player the camera should look
+    private float yTriggerHeight = 5f;               //Height threshold to move camera vertically when jumping
+    private float jumpCameraYOffset = 6f;            //Extra Y offset when player jumps high
 
-    private readonly float zPos = -10;
+    private readonly float zPos = -10;              //Fixed z-pos for the cam
 
-    public Transform target;
+    public Transform target;                        //Player's transform
 
-    public PlayerController playerController;
+    private PlayerController playerController;      //PlayerController script
+   
     private void Start()
     {
-        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        //Gets the playerController script
+        playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
     }
 
-    // Update is called once per frame
     void Update()
     {
+        //Calls this method every frame
         CameraPosition();
     }
 
     public void CameraPosition()
     {
-        Vector3 newPos = new((target.position.x + 7), 0 + yOffset, zPos);
+        //Base camera position a bit ahead of player on x-axis and with y-axis offset
+        Vector3 newPos = new((target.position.x + xForwardOffset), yOffset, zPos);
         transform.position = Vector3.Slerp(transform.position, newPos, followSpeed * Time.deltaTime);
 
-        if (target.transform.position.y >= 5)
+        //If player jumps or is high on the y-axis, move the camera higher
+        if (target.transform.position.y >= yTriggerHeight)
         {
-            Vector3 offScreenPos = new((target.position.x + 7), 6 + yOffset, zPos);
+            Vector3 offScreenPos = new((target.position.x + xForwardOffset), jumpCameraYOffset + yOffset, zPos);
             transform.position = Vector3.Slerp(transform.position, offScreenPos, followSpeed * Time.deltaTime);
         }
 
-        if (playerController.horizontalInput >= -1)
+        //If player moves to the left, update camera to stay centered
+        if (playerController.horizontalInput >= 0)
         {
-            Vector3 backwardsPos = new(target.position.x, 0 + yOffset, zPos);
+            Vector3 backwardsPos = new(target.position.x, yOffset, zPos);
             transform.position = Vector3.Slerp(transform.position, backwardsPos, followSpeed * Time.deltaTime);
         }
 

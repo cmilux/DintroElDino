@@ -9,6 +9,7 @@ TagManager:
   - Collectible
   - Spike
   - Obstacle
+  - GameManager
   layers:
   - Default
   - TransparentFX

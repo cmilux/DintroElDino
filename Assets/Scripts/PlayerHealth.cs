@@ -3,47 +3,20 @@ using TMPro;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int health = 3;
+    public int health = 3;              //Initial player health
 
-    private GameManager gameManager;
-
-    private void Update()
-    {
-        Debug.Log(health);
-    }
-    private void Start()
-    {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-    }
-    //Player life
     public void DamagePlayer()
     {
+        //Reduces player's health by one
         health--;
     }
 
-    //If player collides with an obstacle
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        //If player collides with an obstacle call DamagePlayer()
         if (collision.gameObject.CompareTag("Spike"))
         {
             DamagePlayer();
-
         }
-
-        /*
-       PlayerHealth playerHealth = GetComponent<PlayerHealth>();
-
-       collision.gameObject.GetComponent<PlayerHealth>();
-
-
-       if (playerHealth == null)
-       {
-
-       }
-       else 
-       {
-           playerHealth.DamagePlayer();
-       }
-       */
     }
 }
