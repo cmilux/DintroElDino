@@ -3,7 +3,6 @@ using System.Collections;
 
 public class DestroyablePlatforms : MonoBehaviour
 {
-
     public float disableDelay = 2f;         //Waiting time before disabling platforms
     public float reenableDelay = 5f;        //Waiting time before re enabling platforms
 

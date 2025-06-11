@@ -35,8 +35,19 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         SettingText();      //Update UI
-        ExitGame_Build();   //Close the game with escape key
         GameOver();         //Restarts or shows results of game
+
+        //Calls ExitFromGame method if escape key is pressed
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            ExitFromGame_Unity();
+        }
+
+        //Calls RestartGame method if R key is pressed
+        if (Input.GetKeyUp(KeyCode.R))
+        {
+            RestartGame();
+        }
     }
 
     //Updates the UI with current values
@@ -46,22 +57,11 @@ public class GameManager : MonoBehaviour
         scoreCounter.SetText("Score: " + playerInventory.starCollectible);
     }
 
-    //Close the game from the build if player press Esc
-    public void ExitGame_Build()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))       //Player input
-        {
-            Application.Quit();     //Action (Quit the game)
-        }
-    }
-
     //Restart the game
     public void RestartGame()
     {
         SceneManager.LoadScene("Game Scene");       //Loads the gameScene
-
         playerHealth.health = 3;        //Resets lives
-
         gameOver.SetActive(false);      //The final score is set unactive
 
     }
@@ -73,8 +73,6 @@ public class GameManager : MonoBehaviour
         if (playerHealth.health <= 0 || playerController.transform.position.y < playerController.yRange)
         {
             RestartGame();      //Restarts the game automatically
-
-            Debug.Log("Game Over");
         }
 
         //If player finish the game
@@ -84,8 +82,6 @@ public class GameManager : MonoBehaviour
             gameOver.SetActive(true);
             finalScore.SetText("Your score: " + playerInventory.starCollectible);
         }
-
-
     }
 
     //Closes the game from editor when the exit button is clicked
@@ -93,6 +89,8 @@ public class GameManager : MonoBehaviour
     {
 #if UNITY_EDITOR
         EditorApplication.ExitPlaymode();
+#else
+        Application.Quit();     //Action (Quit the game)
 #endif
     }
 

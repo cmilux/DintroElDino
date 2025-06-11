@@ -5,7 +5,7 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 5f;                //Player's speed
     public float horizontalInput;           //Player moves left or right
-    public float jumpForce = 7f;            //Jump force
+    public float jumpForce = 12f;            //Jump force
     public float xMinRange = -14f;          //Screen range from the left side
     public float xMaxRange = 150f;          //Screen range from the right side
     public float yRange = -7f;              //Screen range from the bottom
