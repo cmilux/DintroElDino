@@ -6,9 +6,6 @@ public class PlayerController : MonoBehaviour
     public float speed = 5f;                //Player's speed
     public float horizontalInput;           //Player moves left or right
     public float jumpForce = 12f;            //Jump force
-    public float xMinRange = -14f;          //Screen range from the left side
-    public float xMaxRange = 150f;          //Screen range from the right side
-    public float yRange = -7f;              //Screen range from the bottom
 
     public bool playerIsOnGround = true;    //Checks if player is colliding with ground or platforms
 
@@ -35,7 +32,6 @@ public class PlayerController : MonoBehaviour
         //Call this methods every frame
         PlayerMovement();
         PlayerJump();
-        PlayerScreenLimit();
         PlayerRotation();
     }
 
@@ -59,7 +55,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    bool IsJumpKeyPressed()
+    public bool IsJumpKeyPressed()
     {
         //Detect what key was pressed for jumping and return the value
         return Input.GetKeyDown(KeyCode.W) ||
@@ -67,23 +63,7 @@ public class PlayerController : MonoBehaviour
             Input.GetKeyDown(KeyCode.Space);
     }
 
-    //Keeps the player between certain screen range
-    void PlayerScreenLimit()
-    {
-        //Player is on left side limit
-        if (transform.position.x < xMinRange)
-        {
-            transform.position = new Vector2(xMinRange, transform.position.y);
-        }
-
-        //Player is on right side limit
-        if (transform.position.x > xMaxRange)
-        {
-            transform.position = new Vector2(xMaxRange, transform.position.y);
-        }
-    }
-
-    void PlayerRotation()
+    public void PlayerRotation()
     {
         //Flips the sprite depending on movement direction
         if (horizontalInput > 0)
@@ -119,25 +99,6 @@ public class PlayerController : MonoBehaviour
                     return;
                 }
             }
-        }
-
-        //Checks if player collided with an obstacle
-        if (collision.gameObject.CompareTag("Spike"))
-        {
-            playerIsOnGround = true;
-            animator.SetBool("IsAlive", false);     //Plays hurt animation
-
-        }
-    }
-
-    //When player stops colliding with the obstacle
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Spike"))
-        {
-            playerIsOnGround = true;
-            animator.SetBool("IsAlive", true);      //Stops hurt animation
-
         }
     }
 }

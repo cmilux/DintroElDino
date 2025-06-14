@@ -2,16 +2,20 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
 public class GameManager : MonoBehaviour
 {
+    private readonly float _xMinRange = -14f;          //Screen range from the left side
+    private readonly float _xMaxRange = 150f;          //Screen range from the right side
+    private readonly float _yRange = -7f;              //Screen range from the bottom
+    private readonly float _endGameRange = 140;
+
     //Player scripts variables
-    private PlayerHealth playerHealth;
-    private PlayerController playerController;
+    private PlayerHealth _playerHealth;
+    private PlayerController _playerController;
     private PlayerInventory playerInventory;
 
     //UI
@@ -21,14 +25,21 @@ public class GameManager : MonoBehaviour
 
     //Game over screen
     public GameObject gameOver;
+    //Player GameOject
+    public GameObject player;
 
     //Gets scripts components from player
     private void Start()
     {
         //Finds the player scripts
-        playerHealth = GameObject.FindWithTag("Player").GetComponent<PlayerHealth>();
-        playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+        _playerHealth = GameObject.FindWithTag("Player").GetComponent<PlayerHealth>();
+        _playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         playerInventory = GameObject.FindWithTag("Player").GetComponent<PlayerInventory>();
+
+        //Set frame rate
+        Application.targetFrameRate = 60;
+        //vSync is disabled so it respects targetFrameRate
+        QualitySettings.vSyncCount = 0;
     }
 
     //Checks every frame to see if this methods are called
@@ -37,12 +48,6 @@ public class GameManager : MonoBehaviour
         SettingText();      //Update UI
         GameOver();         //Restarts or shows results of game
 
-        //Calls ExitFromGame method if escape key is pressed
-        if (Input.GetKeyUp(KeyCode.Escape))
-        {
-            ExitFromGame_Unity();
-        }
-
         //Calls RestartGame method if R key is pressed
         if (Input.GetKeyUp(KeyCode.R))
         {
@@ -50,18 +55,34 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //Keeps the player between certain screen range
+    public void PlayerSideScreenLimit()
+    {
+        //Player is on left side limit
+        if (player.transform.position.x < _xMinRange)
+        {
+            player.transform.position = new Vector2(_xMinRange, transform.position.y);
+        }
+
+        //Player is on right side limit
+        if (player.transform.position.x > _xMaxRange)
+        {
+            player.transform.position = new Vector2(_xMaxRange, transform.position.y);
+        }
+    }
+
     //Updates the UI with current values
     public void SettingText()
     {
-        healthCounter.SetText("Lives: " + playerHealth.health);
+        healthCounter.SetText("Lives: " + _playerHealth.health);
         scoreCounter.SetText("Score: " + playerInventory.starCollectible);
     }
 
     //Restart the game
     public void RestartGame()
     {
-        SceneManager.LoadScene("Game Scene");       //Loads the gameScene
-        playerHealth.health = 3;        //Resets lives
+        SceneManager.LoadScene("GameScene");       //Loads the gameScene
+        _playerHealth.health = 3;        //Resets lives
         gameOver.SetActive(false);      //The final score is set unactive
 
     }
@@ -70,13 +91,13 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         //If player has no lives or falls into the void (yRange)
-        if (playerHealth.health <= 0 || playerController.transform.position.y < playerController.yRange)
+        if (_playerHealth.health <= 0 || _playerController.transform.position.y < _yRange)
         {
             RestartGame();      //Restarts the game automatically
         }
 
         //If player finish the game
-        if (playerController.transform.position.x >= 140)
+        if (_playerController.transform.position.x >= _endGameRange)
         {
             //Sets the gameOver GameObject active and shows the results
             gameOver.SetActive(true);
@@ -84,14 +105,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //Closes the game from editor when the exit button is clicked
-    public void ExitFromGame_Unity()
+    public void MainMenu()
     {
-#if UNITY_EDITOR
-        EditorApplication.ExitPlaymode();
-#else
-        Application.Quit();     //Action (Quit the game)
-#endif
+        SceneManager.LoadScene("MainMenu");       //Loads the menu
     }
-
 }
