@@ -4,10 +4,10 @@ using UnityEngine;
 public class PlayerInventory : MonoBehaviour
 {
     public int starCollectible;         //Tracks player score
-    private readonly int _starValue = 10;          //Value of the collectible
+    [Serialize] private readonly int _starValue = 10;          //Value of the collectible
 
     //Score SFX
-    private AudioSource playerSound;    
+    private AudioSource playerSound;
     public AudioClip starSound;
 
     private void Start()

@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using Unity.VisualScripting;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -8,15 +10,15 @@ using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
-    private readonly float _xMinRange = -14f;          //Screen range from the left side
-    private readonly float _xMaxRange = 150f;          //Screen range from the right side
-    private readonly float _yRange = -7f;              //Screen range from the bottom
-    private readonly float _endGameRange = 140;
+    [Serialize] private readonly float _xMinRange = -14f;          //Screen range from the left side
+    [Serialize] private readonly float _xMaxRange = 150f;          //Screen range from the right side
+    [Serialize] private readonly float _yRange = -7f;              //Screen range from the bottom
+    [Serialize] private readonly float _endGameRange = 140;
 
     //Player scripts variables
     private PlayerHealth _playerHealth;
     private PlayerController _playerController;
-    private PlayerInventory playerInventory;
+    private PlayerInventory _playerInventory;
 
     //UI
     public TextMeshProUGUI healthCounter;
@@ -28,13 +30,18 @@ public class GameManager : MonoBehaviour
     //Player GameOject
     public GameObject player;
 
+    private AudioSource gameAudio;
+
     //Gets scripts components from player
     private void Start()
     {
         //Finds the player scripts
         _playerHealth = GameObject.FindWithTag("Player").GetComponent<PlayerHealth>();
         _playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
-        playerInventory = GameObject.FindWithTag("Player").GetComponent<PlayerInventory>();
+        _playerInventory = GameObject.FindWithTag("Player").GetComponent<PlayerInventory>();
+
+        //Get the audio source of GameManager
+        gameAudio = GetComponent<AudioSource>();
 
         //Set frame rate
         Application.targetFrameRate = 60;
@@ -75,7 +82,7 @@ public class GameManager : MonoBehaviour
     public void SettingText()
     {
         healthCounter.SetText("Lives: " + _playerHealth.health);
-        scoreCounter.SetText("Score: " + playerInventory.starCollectible);
+        scoreCounter.SetText("Score: " + _playerInventory.starCollectible);
     }
 
     //Restart the game
@@ -99,9 +106,10 @@ public class GameManager : MonoBehaviour
         //If player finish the game
         if (_playerController.transform.position.x >= _endGameRange)
         {
-            //Sets the gameOver GameObject active and shows the results
+            //Sets the gameOver GameObject active, show the results and turn the game volume down to be able to hear the victory sound
             gameOver.SetActive(true);
-            finalScore.SetText("Your score: " + playerInventory.starCollectible);
+            finalScore.SetText("Your score: " + _playerInventory.starCollectible);
+            gameAudio.volume = 0.4f;
         }
     }
 

@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public float jumpForce = 12f;            //Jump force
 
     public bool playerIsOnGround = true;    //Checks if player is colliding with ground or platforms
+    //public bool isMoving = false;
 
     private Rigidbody2D _playerRb;          //Player rigid body
 
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour
     //Player sound effects
     private AudioSource _playerSFX;
     public AudioClip jumpSFX;
+    //public AudioClip walkSFX;
 
     void Start()
     {
@@ -55,7 +57,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public bool IsJumpKeyPressed()
+    private bool IsJumpKeyPressed()
     {
         //Detect what key was pressed for jumping and return the value
         return Input.GetKeyDown(KeyCode.W) ||

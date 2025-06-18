@@ -10,7 +10,7 @@ public class CameraFollowing : MonoBehaviour
     public Transform target;                    //Player's transform reference
 
     private PlayerController _playerController;  //Gets the PlayerController script
-   
+
     private void Start()
     {
         //Gets the PlayerController script

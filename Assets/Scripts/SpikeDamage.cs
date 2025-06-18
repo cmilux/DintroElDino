@@ -5,10 +5,17 @@ public class SpikeDamage : MonoBehaviour
     //Player script variable
     private PlayerController _playerController;
 
+    //Player hurt SFX
+    private AudioSource _playerSFX;
+    public AudioClip _playerDamageFX;
+
     private void Start()
     {
         //Gets scripts components from player
         _playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+
+        //Get's the audio source
+        _playerSFX = GetComponent<AudioSource>();
     }
 
     /*
@@ -23,7 +30,8 @@ public class SpikeDamage : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             _playerController.playerIsOnGround = false;
-            _playerController.animator.SetBool("IsAlive", false);     //Plays hurt animation
+            _playerController.animator.SetBool("IsAlive", false);       //Plays hurt animation
+            _playerSFX.PlayOneShot(_playerDamageFX, 0.2f);              //Plays hurt SFX
         }
     }
 
