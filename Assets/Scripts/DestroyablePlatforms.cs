@@ -37,7 +37,6 @@ public class DestroyablePlatforms : MonoBehaviour
             PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
 
             playerController.playerIsOnGround = false;
-            //animator.SetBool("IsJumping", false);       //Stops jump animation
         }
     }
 

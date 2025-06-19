@@ -27,7 +27,7 @@ public class SpikeDamage : MonoBehaviour
         //Checks if player collided with an obstacle
         if (collision.gameObject.CompareTag("Player"))
         {
-            
+
             if (_playerHealth != null)       //if player has any lives
             {
                 _playerHealth.DamagePlayer();        //Call DamagePlayer()
