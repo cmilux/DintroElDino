@@ -5,7 +5,7 @@ public class CameraFollowing : MonoBehaviour
     private float _followSpeed = 2f;              //Follow player camera speed
     private float _yOffset = 1.5f;                  //Vertical offset for the cam pos
 
-    private readonly float _zPos = -10;          //Fixed z-pos of cam
+    private float _zPos = -10;          //Fixed z-pos of cam
 
     public Transform target;                    //Player's transform reference
 

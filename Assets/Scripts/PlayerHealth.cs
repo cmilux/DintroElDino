@@ -11,6 +11,9 @@ public class PlayerHealth : MonoBehaviour
         health--;
     }
 
+    /*
+     * Now calls from SpikeDamage        HERE JUST IN CASE
+     * 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //If player collides with an obstacle call DamagePlayer()
@@ -18,5 +21,7 @@ public class PlayerHealth : MonoBehaviour
         {
             DamagePlayer();
         }
+        
     }
+    */
 }

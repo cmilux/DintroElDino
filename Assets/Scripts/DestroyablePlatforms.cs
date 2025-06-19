@@ -9,7 +9,6 @@ public class DestroyablePlatforms : MonoBehaviour
     private Collider2D _platformCollider;                //Platform's collider
     private SpriteRenderer _platformSpriteRenderer;      //Platform's sprite renderer
     private Rigidbody2D _platformRb;                     //Platform's rigid body
-
     void Start()
     {
         //Get the components and set rigid body to kinematic to avoid physics interactions
@@ -29,10 +28,24 @@ public class DestroyablePlatforms : MonoBehaviour
         }
     }
 
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        //Check if player is colliding with ground
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
+
+            playerController.playerIsOnGround = false;
+            //animator.SetBool("IsJumping", false);       //Stops jump animation
+        }
+    }
+
     void DisablePlatform()
     {
         _platformCollider.enabled = false;                      //Collision disabled and player falls through
         _platformSpriteRenderer.enabled = false;                //Sprite disabled (invisible)
+
         Invoke(nameof(ReenablePlatform), reenableDelay);        //Reenables the platform
     }
 
@@ -41,5 +54,4 @@ public class DestroyablePlatforms : MonoBehaviour
         _platformCollider.enabled = true;               //Re enables the collider
         _platformSpriteRenderer.enabled = true;         //Re enables the sprite again
     }
-
 }

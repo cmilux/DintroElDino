@@ -10,10 +10,10 @@ using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
-    [Serialize] private readonly float _xMinRange = -14f;          //Screen range from the left side
-    [Serialize] private readonly float _xMaxRange = 150f;          //Screen range from the right side
-    [Serialize] private readonly float _yRange = -7f;              //Screen range from the bottom
-    [Serialize] private readonly float _endGameRange = 140;
+    [Serialize] private float _xMinRange = -14f;          //Screen range from the left side
+    [Serialize] private float _xMaxRange = 150f;          //Screen range from the right side
+    [Serialize] private float _yRange = -7f;              //Screen range from the bottom
+    [Serialize] private float _endGameRange = 140;
 
     //Player scripts variables
     private PlayerHealth _playerHealth;
@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
     {
         SettingText();      //Update UI
         GameOver();         //Restarts or shows results of game
+        PlayerSideScreenLimit();
 
         //Calls RestartGame method if R key is pressed
         if (Input.GetKeyUp(KeyCode.R))
@@ -68,13 +69,13 @@ public class GameManager : MonoBehaviour
         //Player is on left side limit
         if (player.transform.position.x < _xMinRange)
         {
-            player.transform.position = new Vector2(_xMinRange, transform.position.y);
+            player.transform.position = new Vector2(_xMinRange, player.transform.position.y);
         }
 
         //Player is on right side limit
         if (player.transform.position.x > _xMaxRange)
         {
-            player.transform.position = new Vector2(_xMaxRange, transform.position.y);
+            player.transform.position = new Vector2(_xMaxRange, player.transform.position.y);
         }
     }
 

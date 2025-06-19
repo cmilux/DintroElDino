@@ -4,6 +4,7 @@ public class SpikeDamage : MonoBehaviour
 {
     //Player script variable
     private PlayerController _playerController;
+    private PlayerHealth _playerHealth;
 
     //Player hurt SFX
     private AudioSource _playerSFX;
@@ -16,20 +17,22 @@ public class SpikeDamage : MonoBehaviour
 
         //Get's the audio source
         _playerSFX = GetComponent<AudioSource>();
-    }
 
-    /*
-     *
-     *  DOUBLE JUMP PROBLEM HERE IF BOTH (ENTER AND EXIT) ARE TRUE
-     * 
-     */
+        //Get player health script
+        _playerHealth = GameObject.FindWithTag("Player").GetComponent<PlayerHealth>();
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //Checks if player collided with an obstacle
         if (collision.gameObject.CompareTag("Player"))
         {
-            _playerController.playerIsOnGround = false;
+            
+            if (_playerHealth != null)       //if player has any lives
+            {
+                _playerHealth.DamagePlayer();        //Call DamagePlayer()
+            }
+            //_playerController.playerIsOnGround = true;        LEAVE IN HERE JUST IN CASE
             _playerController.animator.SetBool("IsAlive", false);       //Plays hurt animation
             _playerSFX.PlayOneShot(_playerDamageFX, 0.2f);              //Plays hurt SFX
         }
@@ -40,7 +43,7 @@ public class SpikeDamage : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            _playerController.playerIsOnGround = true;
+            //_playerController.playerIsOnGround = true;        LEAVE IN HERE JUST IN CASE
             _playerController.animator.SetBool("IsAlive", true);      //Stops hurt animation
         }
     }
